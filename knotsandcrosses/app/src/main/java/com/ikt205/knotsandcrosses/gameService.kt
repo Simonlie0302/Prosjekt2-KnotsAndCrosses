@@ -1,6 +1,7 @@
 package com.ikt205.knotsandcrosses
 
 import android.content.Context
+import android.net.Uri
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
@@ -28,21 +29,28 @@ class GameService(context: Context) {
     private val requestQue: RequestQueue = Volley.newRequestQueue(context)
 
     /// NOTE: One posible way of constructing a list of API url. You want to construct the urls so that you can support different environments (i.e. Debug, Test, Prod etc)
-    private enum class APIEndpoints(val url: String) {
-        CREATE_GAME(
-            "%1s%2s%3s".format(
-                (R.string.protocol),
-                (R.string.domain),
-                (R.string.base_path)
-            )
-        )
+    fun APIEndpoints(): String {
+
+        val url = Uri.Builder().apply {
+            scheme("https")
+            authority("generic-game-service.herokuapp.com")
+            appendPath("Game")
+//            appendPath("types")
+//            appendQueryParameter("type", "1")
+//            appendQueryParameter("sort", "relevance")
+//            fragment("section-name")
+            build()
+        }.toString()
+
+        return url
     }
 
 
     fun createGame(playerId: String, state: GameState, callback: GameServiceCallback) {
 
-        // val url = APIEndpoints.CREATE_GAME.url
-        val url = "https://generic-game-service.herokuapp.com/Game"
+        val url = APIEndpoints()
+
+        print(url + "\n")
 
         val requestData = JSONObject()
         requestData.put("player", playerId)
@@ -71,6 +79,43 @@ class GameService(context: Context) {
 
     fun joinGame(playerId: String, gameId: String, callback: GameServiceCallback) {
 
+        val url = APIEndpoints()
+
+        val urlJoin:String = Uri.Builder().apply {
+            // url
+            scheme("https")
+            authority("generic-game-service.herokuapp.com")
+            appendPath("Game")
+            appendPath(gameId)
+            appendPath("join")
+            build()
+        }.toString()
+
+        print(urlJoin + "\n")
+
+        val requestData = JSONObject()
+        requestData.put("player", playerId)
+        requestData.put("gameId", gameId)
+
+        val request = object : JsonObjectRequest(Request.Method.POST, urlJoin, requestData,
+            {
+                // Success game created.
+                val game = Gson().fromJson(it.toString(0), Game::class.java)
+                print(game)
+                callback(game, null)
+            }, {
+                // Error creating new game.
+                callback(null, it.networkResponse.statusCode)
+            }) {
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Content-Type"] = "application/json"
+                headers["Game-Service-Key"] = "gjF9ebA3Ix"
+                return headers
+            }
+        }
+
+        requestQue.add(request)
     }
 
     fun updateGame(gameId: String, gameState: GameState, callback: GameServiceCallback) {

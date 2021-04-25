@@ -5,5 +5,6 @@
     <string name="base_path">/Game</string>
     <string name="game_service_key">gjF9ebA3Ix</string>
     <string name="player_name">Player name</string>
+    <string name="game_id">Game ID</string>
 
 </resources>
