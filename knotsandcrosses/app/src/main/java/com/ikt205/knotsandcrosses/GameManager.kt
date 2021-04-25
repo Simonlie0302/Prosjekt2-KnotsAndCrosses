@@ -18,10 +18,23 @@ object GameManager {
                 print("ERROR \n")
                 ///TODO("What is the error code? 406 you forgot something in the header. 500 the server di not like what you gave it")
             } else {
-                print("We have a game!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n")
+                print("\nWe have a game!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n")
             }
         }
 
     }
 
+    fun joinGame(player: String, context: Context, gameId:String) {
+
+        print("Created game function \n")
+
+        GameService(context).joinGame(player, gameId) { game: Game?, err: Int? ->
+            if (err != null) {
+                print("ERROR \n")
+                ///TODO("What is the error code? 406 you forgot something in the header. 500 the server di not like what you gave it")
+            } else {
+                print("\nWe have joined a game!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n")
+            }
+        }
+    }
 }
