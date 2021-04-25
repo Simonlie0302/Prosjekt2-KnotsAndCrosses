@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">knotsandcrosses</string>
+    <string name="protocol">https://</string>
+    <string name="domain">generic-game-service.herokuapp.com</string>
+    <string name="base_path">/Game</string>
+    <string name="game_service_key">gjF9ebA3Ix</string>
+    <string name="player_name">Player name</string>
+
 </resources>
