@@ -4,19 +4,29 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import com.ikt205.knotsandcrosses.App.Companion.context
+import com.ikt205.knotsandcrosses.GameManager.gId
+import com.ikt205.knotsandcrosses.GameManager.pollGame
 import com.ikt205.knotsandcrosses.databinding.ActivityMainBinding
 import com.ikt205.knotsandcrosses.databinding.DialogCreateGameBinding
 import com.ikt205.knotsandcrosses.databinding.DialogJoinGameBinding
+import java.util.*
+import kotlin.concurrent.fixedRateTimer
+import kotlin.concurrent.schedule
 
-class MainActivity : AppCompatActivity() , GameDialogListener {
 
-    val TAG:String = "MainActivity"
+class MainActivity : AppCompatActivity(), GameDialogListener {
+
+    val TAG: String = "MainActivity"
 
     lateinit var binding: ActivityMainBinding
+    var pollGameId = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +42,7 @@ class MainActivity : AppCompatActivity() , GameDialogListener {
         }
     }
 
-    private fun createNewGame(){
+    private fun createNewGame() {
         //val dlg = CreateGameDialog()
 
         //dlg.show(supportFragmentManager,"CreateGameDialogFragment")
@@ -49,6 +59,9 @@ class MainActivity : AppCompatActivity() , GameDialogListener {
             //listener.onDialogCreateGame(inputText.text.toString())
             print("inside alert dialog \n")
             onDialogCreateGame(inputText.text.toString())
+            Thread.sleep(500)
+            val intent = Intent(this, GameActivity::class.java)
+            startActivity(intent)
         }
         builder.show()
 
@@ -56,7 +69,7 @@ class MainActivity : AppCompatActivity() , GameDialogListener {
 
     }
 
-    private fun joinGame(){
+    private fun joinGame() {
         val builder = AlertDialog.Builder(this)
         val inflater = layoutInflater
         builder.setTitle("Join a game:")
@@ -67,21 +80,25 @@ class MainActivity : AppCompatActivity() , GameDialogListener {
         print("before alert dialog \n")
 
         builder.setPositiveButton("OK") { dialogInterface, i ->
-            //listener.onDialogCreateGame(inputText.text.toString())
+            //listener.onDialogCreateGame(inputTex t.text.toString())
             print("inside alert dialog \n")
+            pollGameId = inputGameId.text.toString()
             onDialogJoinGame(inputUsername.text.toString(), inputGameId.text.toString())
+            Thread.sleep(500)
+            val intent = Intent(this, GameActivity::class.java)
+            startActivity(intent)
         }
         builder.show()
-
     }
 
     override fun onDialogCreateGame(player: String) {
         GameManager.createGame(player, this)
-        Log.d(TAG,player)
+        Log.d(TAG, player)
     }
 
     override fun onDialogJoinGame(player: String, gameId: String) {
         GameManager.joinGame(player, this, gameId)
         Log.d(TAG, "$player $gameId")
     }
+
 }

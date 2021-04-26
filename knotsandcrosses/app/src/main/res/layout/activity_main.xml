@@ -38,5 +38,16 @@
         app:layout_constraintTop_toBottomOf="@+id/startGameButton"
         app:layout_constraintWidth_percent="0.75" />
 
+    <Button
+        android:id="@+id/pollGameButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Start game"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/joinGameButton"
+        app:layout_constraintWidth_percent="0.75" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
