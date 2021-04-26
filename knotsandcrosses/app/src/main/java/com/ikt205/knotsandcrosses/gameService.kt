@@ -12,6 +12,8 @@ import com.ikt205.knotsandcrosses.Game
 import com.ikt205.knotsandcrosses.GameState
 import com.ikt205.knotsandcrosses.App
 import org.json.JSONObject
+import java.util.*
+import kotlin.concurrent.schedule
 
 typealias GameServiceCallback = (state: Game?, errorCode: Int?) -> Unit
 
@@ -75,13 +77,14 @@ class GameService(context: Context) {
         }
 
         requestQue.add(request)
+
     }
 
     fun joinGame(playerId: String, gameId: String, callback: GameServiceCallback) {
 
         val url = APIEndpoints()
 
-        val urlJoin:String = Uri.Builder().apply {
+        val urlJoin: String = Uri.Builder().apply {
             // url
             scheme("https")
             authority("generic-game-service.herokuapp.com")
@@ -119,11 +122,79 @@ class GameService(context: Context) {
     }
 
     fun updateGame(gameId: String, gameState: GameState, callback: GameServiceCallback) {
+        val url = APIEndpoints()
 
+        val urlJoin: String = Uri.Builder().apply {
+            // url
+            scheme("https")
+            authority("generic-game-service.herokuapp.com")
+            appendPath("Game")
+            appendPath(gameId)
+            appendPath("update")
+            build()
+        }.toString()
+
+        print(urlJoin + "\n")
+
+        val requestData = JSONObject()
+        requestData.put("state", gameState)
+        requestData.put("gameId", gameId)
+
+        val request = object : JsonObjectRequest(Request.Method.POST, urlJoin, requestData,
+            {
+                // Success game created.
+                val game = Gson().fromJson(it.toString(0), Game::class.java)
+                print(game)
+                callback(game, null)
+            }, {
+                // Error creating new game.
+                callback(null, it.networkResponse.statusCode)
+            }) {
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Content-Type"] = "application/json"
+                headers["Game-Service-Key"] = "gjF9ebA3Ix"
+                return headers
+            }
+        }
+
+        requestQue.add(request)
     }
 
     fun pollGame(gameId: String, callback: GameServiceCallback) {
+        val urlJoin: String = Uri.Builder().apply {
+            // url
+            scheme("https")
+            authority("generic-game-service.herokuapp.com")
+            appendPath("Game")
+            appendPath(gameId)
+            appendPath("poll")
+            build()
+        }.toString()
 
+        println(urlJoin)
+
+        val requestData = JSONObject()
+
+        requestData.put("gameId", gameId)
+        val request = object : JsonObjectRequest(Request.Method.GET, urlJoin, requestData,
+            {
+                // Success game created.
+                val newState = Gson().fromJson(it.toString(0), Game::class.java)
+                callback(newState, null)
+                println(newState)
+            }, {
+                // Error creating new game.
+                callback(null, it.networkResponse.statusCode)
+            }) {
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Content-Type"] = "application/json"
+                headers["Game-Service-Key"] = "gjF9ebA3Ix"
+                return headers
+            }
+        }
+        requestQue.add(request)
     }
 
 }
