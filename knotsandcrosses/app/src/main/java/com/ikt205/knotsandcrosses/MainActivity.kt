@@ -25,8 +25,6 @@ class MainActivity : AppCompatActivity(), GameDialogListener {
     val TAG: String = "MainActivity"
 
     lateinit var binding: ActivityMainBinding
-    var pollGameId = ""
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,7 +80,7 @@ class MainActivity : AppCompatActivity(), GameDialogListener {
         builder.setPositiveButton("OK") { dialogInterface, i ->
             //listener.onDialogCreateGame(inputTex t.text.toString())
             print("inside alert dialog \n")
-            pollGameId = inputGameId.text.toString()
+            gId = inputGameId.text.toString()
             onDialogJoinGame(inputUsername.text.toString(), inputGameId.text.toString())
             Thread.sleep(500)
             val intent = Intent(this, GameActivity::class.java)
