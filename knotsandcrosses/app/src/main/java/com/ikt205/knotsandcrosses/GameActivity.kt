@@ -14,17 +14,14 @@ class GameActivity: AppCompatActivity() {
 
     val TAG: String = "GameActivity"
 
-    //var pollState: GameState = mutableListOf(listOf(0, 0, 0), listOf(0, 0, 0), listOf(0, 0, 0))
-//    var row0 = mutableListOf(0, 0, 0)
-//    var row1 = mutableListOf(0, 0, 0)
-//    var row2 = mutableListOf(0, 0, 0)
-
     lateinit var binding: ActivityGameBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        GameManager.pollGame(this)
 
         val intent = Intent(this, PollService::class.java)
         startService(intent)

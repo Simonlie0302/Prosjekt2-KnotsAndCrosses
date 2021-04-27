@@ -8,13 +8,11 @@ import com.fasterxml.jackson.module.kotlin.*
 
 object GameManager {
 
-    var player: String? = null
-    var state: GameState? = null
-    lateinit var gId:String
-    lateinit var pollState:GameState
-    lateinit var col1:MutableList<Int>
-    lateinit var col2:MutableList<Int>
-    lateinit var col3:MutableList<Int>
+    lateinit var gId: String
+    lateinit var pollState: GameState
+    lateinit var col1: MutableList<Int>
+    lateinit var col2: MutableList<Int>
+    lateinit var col3: MutableList<Int>
 
 
     val StartingGameState: GameState = listOf(listOf(0, 0, 0), listOf(0, 0, 0), listOf(0, 0, 0))
@@ -73,9 +71,8 @@ object GameManager {
 //
                 var newState = mapper.readValue(gamePollState, List::class.java)
 //
-//                //println("Dette er genres: $genres")
-               // println("Dette er dtos: $newState dette er riktig"+newState[0])
-
+//               println("Dette er genres: $genres")
+                // println("Dette er dtos: $newState dette er riktig"+newState[0])
 
                 pollState = newState as GameState
 
