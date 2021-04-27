@@ -30,6 +30,8 @@ class GameService(context: Context) {
     /// NOTE: God practice to use a que for performing requests.
     private val requestQue: RequestQueue = Volley.newRequestQueue(context)
 
+    var gamePollState = ""
+
     /// NOTE: One posible way of constructing a list of API url. You want to construct the urls so that you can support different environments (i.e. Debug, Test, Prod etc)
     fun APIEndpoints(): String {
 

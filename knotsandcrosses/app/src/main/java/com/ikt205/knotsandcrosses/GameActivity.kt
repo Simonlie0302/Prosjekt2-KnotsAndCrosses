@@ -3,17 +3,21 @@ package com.ikt205.knotsandcrosses
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.ikt205.knotsandcrosses.GameManager.col1
+import com.ikt205.knotsandcrosses.GameManager.col2
+import com.ikt205.knotsandcrosses.GameManager.col3
 import com.ikt205.knotsandcrosses.GameManager.gId
+import com.ikt205.knotsandcrosses.GameManager.pollState
 import com.ikt205.knotsandcrosses.databinding.ActivityGameBinding
 
 class GameActivity: AppCompatActivity() {
 
     val TAG: String = "GameActivity"
 
-    var gameState: GameState = mutableListOf(listOf(0, 0, 0), listOf(0, 0, 0), listOf(0, 0, 0))
-    var row0 = mutableListOf(0, 0, 0)
-    var row1 = mutableListOf(0, 0, 0)
-    var row2 = mutableListOf(0, 0, 0)
+    //var pollState: GameState = mutableListOf(listOf(0, 0, 0), listOf(0, 0, 0), listOf(0, 0, 0))
+//    var row0 = mutableListOf(0, 0, 0)
+//    var row1 = mutableListOf(0, 0, 0)
+//    var row2 = mutableListOf(0, 0, 0)
 
     lateinit var binding: ActivityGameBinding
 
@@ -28,66 +32,66 @@ class GameActivity: AppCompatActivity() {
         binding.btn1.setOnClickListener{
             //gamePollState = gameState
 
-            row0[0]=1
-            gameState = listOf(row0) + listOf(row1) + listOf(row2)
-            GameManager.updateGame(this, gameState)
-            println(gameState)
+            col1[0]=1
+            pollState = listOf(col1) + listOf(col2) + listOf(col3)
+            GameManager.updateGame(this, pollState)
+            println(pollState)
         }
 
         binding.btn2.setOnClickListener{
-            row0[1]=1
-            gameState = listOf(row0) + listOf(row1) + listOf(row2)
-            GameManager.updateGame(this, gameState)
-            println(gameState)
+            col1[1]=1
+            pollState = listOf(col1) + listOf(col2) + listOf(col3)
+            GameManager.updateGame(this, pollState)
+            println(pollState)
         }
 
         binding.btn3.setOnClickListener{
-            row0[2]=1
-            gameState = listOf(row0) + listOf(row1) + listOf(row2)
-            GameManager.updateGame(this, gameState)
-            println(gameState)
+            col1[2]=1
+            pollState = listOf(col1) + listOf(col2) + listOf(col3)
+            GameManager.updateGame(this, pollState)
+            println(pollState)
         }
 
         binding.btn4.setOnClickListener{
-            row1[0]=1
-            gameState = listOf(row0) + listOf(row1) + listOf(row2)
-            GameManager.updateGame(this, gameState)
-            println(gameState)
+            col2[0]=1
+            pollState = listOf(col1) + listOf(col2) + listOf(col3)
+            GameManager.updateGame(this, pollState)
+            println(pollState)
         }
 
         binding.btn5.setOnClickListener{
-            row1[1]=1
-            gameState = listOf(row0) + listOf(row1) + listOf(row2)
-            GameManager.updateGame(this, gameState)
-            println(gameState)
+            col2[1]=1
+            pollState = listOf(col1) + listOf(col2) + listOf(col3)
+            GameManager.updateGame(this, pollState)
+            println(pollState)
         }
 
         binding.btn6.setOnClickListener{
-            row1[2]=1
-            gameState = listOf(row0) + listOf(row1) + listOf(row2)
-            GameManager.updateGame(this, gameState)
-            println(gameState)
+            col2[2]=1
+            pollState = listOf(col1) + listOf(col2) + listOf(col3)
+            GameManager.updateGame(this, pollState)
+            println(pollState)
         }
 
         binding.btn7.setOnClickListener{
-            row2[0]=1
-            gameState = listOf(row0) + listOf(row1) + listOf(row2)
-            GameManager.updateGame(this, gameState)
-            println(gameState)
+            col3[0]=1
+            pollState = listOf(col1) + listOf(col2) + listOf(col3)
+            GameManager.updateGame(this, pollState)
+            println(pollState)
         }
 
         binding.btn8.setOnClickListener{
-            row2[1]=1
-            gameState = listOf(row0) + listOf(row1) + listOf(row2)
-            GameManager.updateGame(this, gameState)
-            println(gameState)
+            col3[1]=1
+            pollState = listOf(col1) + listOf(col2) + listOf(col3)
+            GameManager.updateGame(this, pollState)
+            println(pollState)
         }
 
         binding.btn9.setOnClickListener{
-            row2[2]=1
-            gameState = listOf(row0) + listOf(row1) + listOf(row2)
-            GameManager.updateGame(this, gameState)
-            print(gameState)
+            col3[2]=1
+            pollState = listOf(col1) + listOf(col2) + listOf(col3)
+            GameManager.updateGame(this, pollState)
+            print(pollState)
         }
 
     }
