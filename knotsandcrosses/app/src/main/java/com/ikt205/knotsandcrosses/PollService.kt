@@ -20,8 +20,17 @@ class PollService : Service() {
             while (true) {
                 // launch a new coroutine in background and continue
                 delay(5000)
+                val tempList = pollState
                 GameManager.pollGame(applicationContext)
                 delay(1000)
+
+                if (tempList.toString() != pollState.toString()){
+                    print("to string fungerer")
+                }
+
+                if(!(tempList.containsAll(pollState) && pollState.containsAll(tempList))){
+                    println("listen er ulik")
+                }
 //                println("new pollstate:"+ pollState)
             }
         }

@@ -26,9 +26,9 @@ class GameActivity: AppCompatActivity() {
         val intent = Intent(this, PollService::class.java)
         startService(intent)
 
+
         binding.btn1.setOnClickListener{
             //gamePollState = gameState
-
             col1[0]=1
             pollState = listOf(col1) + listOf(col2) + listOf(col3)
             GameManager.updateGame(this, pollState)
