@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.ikt205.knotsandcrosses.GameManager.col1
 import com.ikt205.knotsandcrosses.GameManager.col2
 import com.ikt205.knotsandcrosses.GameManager.col3
-import com.ikt205.knotsandcrosses.GameManager.gId
 import com.ikt205.knotsandcrosses.GameManager.pollState
+import com.ikt205.knotsandcrosses.GameManager.contendersTurn
 import com.ikt205.knotsandcrosses.databinding.ActivityGameBinding
 
 class GameActivity: AppCompatActivity() {
@@ -26,11 +26,11 @@ class GameActivity: AppCompatActivity() {
         val intent = Intent(this, PollService::class.java)
         startService(intent)
 
-        binding.btn1.setOnClickListener{
-            //gamePollState = gameState
 
+        binding.btn1.setOnClickListener{
             col1[0]=1
             pollState = listOf(col1) + listOf(col2) + listOf(col3)
+            contendersTurn = true
             GameManager.updateGame(this, pollState)
             println(pollState)
         }
@@ -38,6 +38,7 @@ class GameActivity: AppCompatActivity() {
         binding.btn2.setOnClickListener{
             col1[1]=1
             pollState = listOf(col1) + listOf(col2) + listOf(col3)
+            contendersTurn = true
             GameManager.updateGame(this, pollState)
             println(pollState)
         }
@@ -45,6 +46,7 @@ class GameActivity: AppCompatActivity() {
         binding.btn3.setOnClickListener{
             col1[2]=1
             pollState = listOf(col1) + listOf(col2) + listOf(col3)
+            contendersTurn = true
             GameManager.updateGame(this, pollState)
             println(pollState)
         }
@@ -52,6 +54,7 @@ class GameActivity: AppCompatActivity() {
         binding.btn4.setOnClickListener{
             col2[0]=1
             pollState = listOf(col1) + listOf(col2) + listOf(col3)
+            contendersTurn = true
             GameManager.updateGame(this, pollState)
             println(pollState)
         }
@@ -59,6 +62,7 @@ class GameActivity: AppCompatActivity() {
         binding.btn5.setOnClickListener{
             col2[1]=1
             pollState = listOf(col1) + listOf(col2) + listOf(col3)
+            contendersTurn = true
             GameManager.updateGame(this, pollState)
             println(pollState)
         }
@@ -66,6 +70,7 @@ class GameActivity: AppCompatActivity() {
         binding.btn6.setOnClickListener{
             col2[2]=1
             pollState = listOf(col1) + listOf(col2) + listOf(col3)
+            contendersTurn = true
             GameManager.updateGame(this, pollState)
             println(pollState)
         }
@@ -73,13 +78,16 @@ class GameActivity: AppCompatActivity() {
         binding.btn7.setOnClickListener{
             col3[0]=1
             pollState = listOf(col1) + listOf(col2) + listOf(col3)
+            contendersTurn = true
             GameManager.updateGame(this, pollState)
             println(pollState)
+
         }
 
         binding.btn8.setOnClickListener{
             col3[1]=1
             pollState = listOf(col1) + listOf(col2) + listOf(col3)
+            contendersTurn = true
             GameManager.updateGame(this, pollState)
             println(pollState)
         }
@@ -87,9 +95,14 @@ class GameActivity: AppCompatActivity() {
         binding.btn9.setOnClickListener{
             col3[2]=1
             pollState = listOf(col1) + listOf(col2) + listOf(col3)
+            contendersTurn = true
             GameManager.updateGame(this, pollState)
             print(pollState)
         }
 
     }
+    fun turnBased(){
+        println("Turnbased")
+    }
+
 }

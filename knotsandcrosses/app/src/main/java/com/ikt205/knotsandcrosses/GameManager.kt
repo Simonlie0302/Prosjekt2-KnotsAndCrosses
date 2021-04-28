@@ -1,8 +1,6 @@
 package com.ikt205.knotsandcrosses
 
 import android.content.Context
-import com.google.gson.*
-import java.util.*
 import com.fasterxml.jackson.module.kotlin.*
 
 
@@ -13,17 +11,19 @@ object GameManager {
     lateinit var col1: MutableList<Int>
     lateinit var col2: MutableList<Int>
     lateinit var col3: MutableList<Int>
+    var contendersTurn = true
 
 
     val StartingGameState: GameState = listOf(listOf(0, 0, 0), listOf(0, 0, 0), listOf(0, 0, 0))
 
     fun createGame(player: String, context: Context) {
-        print("Created game function \n")
+        print("Min tur \n")
+
+        contendersTurn = false
 
         GameService(context).createGame(player, StartingGameState) { game: Game?, err: Int? ->
             if (err != null) {
                 print("ERROR \n")
-                ///TODO("What is the error code? 406 you forgot something in the header. 500 the server di not like what you gave it")
             } else {
                 gId = game?.gameId.toString()
                 print("\nWe have a game\n")
@@ -33,12 +33,13 @@ object GameManager {
 
     fun joinGame(player: String, context: Context, gameId: String) {
 
-        print("Joining a game function \n")
+        print("Motstanders tur \n")
+
+        contendersTurn = true
 
         GameService(context).joinGame(player, gameId) { game: Game?, err: Int? ->
             if (err != null) {
                 print("ERROR \n")
-                ///TODO("What is the error code? 406 you forgot something in the header. 500 the server di not like what you gave it")
             } else {
                 print("\nWe have joined a game with the id: " + gameId)
             }
@@ -53,7 +54,6 @@ object GameManager {
         GameService(context).pollGame(gId) { game: Game?, err: Int? ->
             if (err != null) {
                 print("ERROR \n")
-                ///TODO("What is the error code? 406 you forgot something in the header. 500 the server di not like what you gave it")
             } else {
                 println("\nJoined a game with the id: " + gId)
 
@@ -100,7 +100,6 @@ object GameManager {
         GameService(context).updateGame(gId, updateState) { game: Game?, err: Int? ->
             if (err != null) {
                 print("ERROR \n")
-                ///TODO("What is the error code? 406 you forgot something in the header. 500 the server di not like what you gave it")
             } else {
                 print("\nWe have joined a game with the id: " + gId)
             }
