@@ -26,7 +26,7 @@ class GameActivity: AppCompatActivity() {
         val intent = Intent(this, PollService::class.java)
         startService(intent)
 
-
+        // Sett en if statement inni i hver knapp som sjekker om den er true, så ikke oppdater listen
         binding.btn1.setOnClickListener{
             col1[0]=1
             pollState = listOf(col1) + listOf(col2) + listOf(col3)

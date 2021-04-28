@@ -1,13 +1,14 @@
 package com.ikt205.knotsandcrosses
 
+import android.app.AlertDialog
+import android.app.Application
 import android.app.Service
 import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
-import android.os.Looper
-import android.widget.Button
-import com.ikt205.knotsandcrosses.GameManager.pollState
+import android.widget.EditText
 import com.ikt205.knotsandcrosses.GameManager.contendersTurn
+import com.ikt205.knotsandcrosses.GameManager.pollState
 import kotlinx.coroutines.*
 
 class PollService : Service() {
@@ -19,7 +20,6 @@ class PollService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-
 
         GlobalScope.launch {
 
@@ -36,9 +36,8 @@ class PollService : Service() {
                     if (!(tempList.containsAll(pollState) && pollState.containsAll(tempList))) {
                         println("Min tur")
                         contendersTurn = false
-
                     } else {
-                        //GameActivity().turnBased()
+                        GameActivity().turnBased()
                         println("Motstanders trekk")
                     }
                 }
