@@ -17,6 +17,7 @@ object GameManager {
     var contenderName = ""
     var myName = ""
     var winMessage = ""
+    var opponentList = mutableListOf<Int>()
 
     val StartingGameState: GameState = listOf(listOf(0, 0, 0), listOf(0, 0, 0), listOf(0, 0, 0))
 
@@ -48,6 +49,7 @@ object GameManager {
                 print("ERROR \n")
             } else {
                 pollGame(context)
+                contenderName = game?.players?.get(0).toString()
                 print("\nWe have joined a game with the id: " + gameId)
             }
         }
@@ -159,30 +161,39 @@ object GameManager {
 
     fun disableContendersButtons() {
         if (col1[0] == opponentState) {
+            opponentList.add(1)
             gameList.remove(1)
         }
         if (col1[1] == opponentState) {
+            opponentList.add(2)
             gameList.remove(2)
         }
         if (col1[2] == opponentState) {
+            opponentList.add(3)
             gameList.remove(3)
         }
         if (col2[0] == opponentState) {
+            opponentList.add(4)
             gameList.remove(4)
         }
         if (col2[1] == opponentState) {
+            opponentList.add(5)
             gameList.remove(5)
         }
         if (col2[2] == opponentState) {
+            opponentList.add(6)
             gameList.remove(6)
         }
         if (col3[0] == opponentState) {
+            opponentList.add(7)
             gameList.remove(7)
         }
         if (col3[1] == opponentState) {
+            opponentList.add(8)
             gameList.remove(8)
         }
         if (col3[2] == opponentState) {
+            opponentList.add(9)
             gameList.remove(9)
         }
         println("Denne er ny: " + gameList)
