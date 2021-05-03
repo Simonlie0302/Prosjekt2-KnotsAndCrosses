@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="mainBackground" parent="@style/ThemeOverlay.AppCompat.Dark">
+        <item name="android:background">@color/colorPanel1</item>
+    </style>
+    <style name="buttons" parent="@style/ThemeOverlay.AppCompat.Dark">
+        <item name="android:background">@color/colorPanel2</item>
+    </style>
+
+
+</resources>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">knotsandcrosses</string>
+    <string name="app_name">Tic Tac Toe</string>
     <string name="protocol">https://</string>
     <string name="domain">generic-game-service.herokuapp.com</string>
     <string name="base_path">/Game</string>

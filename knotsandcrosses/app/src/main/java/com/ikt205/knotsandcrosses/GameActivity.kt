@@ -2,6 +2,7 @@ package com.ikt205.knotsandcrosses
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.toColor
 import com.ikt205.knotsandcrosses.GameManager.col1
 import com.ikt205.knotsandcrosses.GameManager.col2
 import com.ikt205.knotsandcrosses.GameManager.col3
@@ -196,31 +197,31 @@ class GameActivity : AppCompatActivity() {
         runOnUiThread {
             for (btn in gameList) {
                 if (btn == 1) {
-                    binding.btn1.isEnabled = true
+                    binding.btn1.isClickable = true
                 }
                 if (btn == 2) {
-                    binding.btn2.isEnabled = true
+                    binding.btn2.isClickable = true
                 }
                 if (btn == 3) {
-                    binding.btn3.isEnabled = true
+                    binding.btn3.isClickable = true
                 }
                 if (btn == 4) {
-                    binding.btn4.isEnabled = true
+                    binding.btn4.isClickable = true
                 }
                 if (btn == 5) {
-                    binding.btn5.isEnabled = true
+                    binding.btn5.isClickable = true
                 }
                 if (btn == 6) {
-                    binding.btn6.isEnabled = true
+                    binding.btn6.isClickable = true
                 }
                 if (btn == 7) {
-                    binding.btn7.isEnabled = true
+                    binding.btn7.isClickable = true
                 }
                 if (btn == 8) {
-                    binding.btn8.isEnabled = true
+                    binding.btn8.isClickable = true
                 }
                 if (btn == 9) {
-                    binding.btn9.isEnabled = true
+                    binding.btn9.isClickable = true
                 }
             }
             for (btn in opponentList) {
@@ -257,15 +258,15 @@ class GameActivity : AppCompatActivity() {
 
     fun disableButtons() {
         runOnUiThread {
-            binding.btn1.isEnabled = false
-            binding.btn2.isEnabled = false
-            binding.btn3.isEnabled = false
-            binding.btn4.isEnabled = false
-            binding.btn5.isEnabled = false
-            binding.btn6.isEnabled = false
-            binding.btn7.isEnabled = false
-            binding.btn8.isEnabled = false
-            binding.btn9.isEnabled = false
+            binding.btn1.isClickable = false
+            binding.btn2.isClickable = false
+            binding.btn3.isClickable = false
+            binding.btn4.isClickable = false
+            binding.btn5.isClickable = false
+            binding.btn6.isClickable = false
+            binding.btn7.isClickable = false
+            binding.btn8.isClickable = false
+            binding.btn9.isClickable = false
         }
     }
 }
