@@ -5,27 +5,28 @@ import com.fasterxml.jackson.module.kotlin.*
 
 object GameManager {
 
-    var gId: String = ""
     lateinit var pollState: GameState
     lateinit var col1: MutableList<Int>
     lateinit var col2: MutableList<Int>
     lateinit var col3: MutableList<Int>
-    var contendersTurn = true
+
     var gameList = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9)
+    val StartingGameState: GameState = listOf(listOf(0, 0, 0), listOf(0, 0, 0), listOf(0, 0, 0))
+    var opponentList = mutableListOf<Int>()
+
     var myState = 1
     var opponentState = 2
     var contenderName = ""
     var myName = ""
     var winMessage = ""
-    var opponentList = mutableListOf<Int>()
+    var gId: String = ""
+    var contendersTurn = true
 
-    val StartingGameState: GameState = listOf(listOf(0, 0, 0), listOf(0, 0, 0), listOf(0, 0, 0))
 
     fun createGame(player: String, context: Context) {
-        print("Min tur \n")
 
         contendersTurn = false
-
+        // Gameservice function createGame retrieves the callback (game: Game?, err: Int?), returns error with a networkResponse
         GameService(context).createGame(player, StartingGameState) { game: Game?, err: Int? ->
             if (err != null) {
                 print("ERROR \n")
@@ -39,11 +40,10 @@ object GameManager {
 
     fun joinGame(player: String, context: Context, gameId: String) {
 
-        print("Motstanders tur \n")
         gId = gameId
-
         contendersTurn = true
 
+        // Gameservice function createGame retrieves the callback (game: Game?, err: Int?), returns error with a networkResponse
         GameService(context).joinGame(player, gameId) { game: Game?, err: Int? ->
             if (err != null) {
                 print("ERROR \n")
@@ -57,8 +57,7 @@ object GameManager {
 
     fun pollGame(context: Context) {
 
-        print("Pollgame function \n")
-
+        // Gameservice function createGame retrieves the callback (game: Game?, err: Int?), returns error with a networkResponse
         GameService(context).pollGame(gId) { game: Game?, err: Int? ->
             if (err != null) {
                 print("ERROR \n")
@@ -80,14 +79,6 @@ object GameManager {
                 col2 = newCol2
                 col3 = newCol3
 
-//                var checkContendersData = (col1 + col2 + col3)
-//
-//                for (i in checkContendersData) {
-//                    if (i != myState) {
-//                        opponentState = 2
-//                    }
-//                }
-
                 if (contenderName == "") {
                     if (game?.players?.size!! > 1) {
                         contenderName = game.players[1]
@@ -101,8 +92,7 @@ object GameManager {
 
     fun updateGame(context: Context, updateState: GameState) {
 
-        print("Joining a game function \n")
-
+        // Gameservice function createGame retrieves the callback (game: Game?, err: Int?), returns error with networkResponse
         GameService(context).updateGame(gId, updateState) { game: Game?, err: Int? ->
             if (err != null) {
                 print("ERROR \n")
@@ -161,7 +151,9 @@ object GameManager {
 
     fun disableContendersButtons() {
         if (col1[0] == opponentState) {
+            // Adds to the newly set opponent list for usage with O and X
             opponentList.add(1)
+            // removes from list to make buttons unclickable
             gameList.remove(1)
         }
         if (col1[1] == opponentState) {
@@ -196,7 +188,6 @@ object GameManager {
             opponentList.add(9)
             gameList.remove(9)
         }
-        println("Denne er ny: " + gameList)
     }
 
 }
