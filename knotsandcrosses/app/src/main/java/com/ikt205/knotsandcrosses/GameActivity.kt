@@ -2,6 +2,7 @@ package com.ikt205.knotsandcrosses
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.ikt205.knotsandcrosses.GameManager.col1
 import com.ikt205.knotsandcrosses.GameManager.col2
@@ -15,10 +16,10 @@ import com.ikt205.knotsandcrosses.GameManager.gameFinished
 import com.ikt205.knotsandcrosses.GameManager.gameList
 import com.ikt205.knotsandcrosses.GameManager.myName
 import com.ikt205.knotsandcrosses.GameManager.myState
+import com.ikt205.knotsandcrosses.GameManager.opponentList
 import com.ikt205.knotsandcrosses.GameManager.opponentState
 import com.ikt205.knotsandcrosses.GameManager.pollGame
 import com.ikt205.knotsandcrosses.databinding.ActivityGameBinding
-import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -35,6 +36,8 @@ class GameActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.gameTitleID.text = gId
+        binding.contenderGameName.text = "Waiting for opponent..."
+        binding.myGameName.text = myName
 
         // Sett en if statement inni i hver knapp som sjekker om den er true, så ikke oppdater listen
         binding.btn1.setOnClickListener {
@@ -42,6 +45,7 @@ class GameActivity : AppCompatActivity() {
             pollState = listOf(col1) + listOf(col2) + listOf(col3)
             contendersTurn = true
             gameList.remove(1)
+            binding.btn1.setBackgroundResource(R.drawable.ic_baseline_close_24)
             GameManager.updateGame(this, pollState)
             disableButtons()
             turnBased()
@@ -53,6 +57,7 @@ class GameActivity : AppCompatActivity() {
             pollState = listOf(col1) + listOf(col2) + listOf(col3)
             contendersTurn = true
             gameList.remove(2)
+            binding.btn2.setBackgroundResource(R.drawable.ic_baseline_close_24)
             GameManager.updateGame(this, pollState)
             disableButtons()
             turnBased()
@@ -64,6 +69,7 @@ class GameActivity : AppCompatActivity() {
             pollState = listOf(col1) + listOf(col2) + listOf(col3)
             contendersTurn = true
             gameList.remove(3)
+            binding.btn3.setBackgroundResource(R.drawable.ic_baseline_close_24)
             GameManager.updateGame(this, pollState)
             disableButtons()
             turnBased()
@@ -75,6 +81,7 @@ class GameActivity : AppCompatActivity() {
             pollState = listOf(col1) + listOf(col2) + listOf(col3)
             contendersTurn = true
             gameList.remove(4)
+            binding.btn4.setBackgroundResource(R.drawable.ic_baseline_close_24)
             GameManager.updateGame(this, pollState)
             disableButtons()
             turnBased()
@@ -86,6 +93,7 @@ class GameActivity : AppCompatActivity() {
             pollState = listOf(col1) + listOf(col2) + listOf(col3)
             contendersTurn = true
             gameList.remove(5)
+            binding.btn5.setBackgroundResource(R.drawable.ic_baseline_close_24)
             GameManager.updateGame(this, pollState)
             disableButtons()
             turnBased()
@@ -97,6 +105,7 @@ class GameActivity : AppCompatActivity() {
             pollState = listOf(col1) + listOf(col2) + listOf(col3)
             contendersTurn = true
             gameList.remove(6)
+            binding.btn6.setBackgroundResource(R.drawable.ic_baseline_close_24)
             GameManager.updateGame(this, pollState)
             disableButtons()
             turnBased()
@@ -108,6 +117,7 @@ class GameActivity : AppCompatActivity() {
             pollState = listOf(col1) + listOf(col2) + listOf(col3)
             contendersTurn = true
             gameList.remove(7)
+            binding.btn7.setBackgroundResource(R.drawable.ic_baseline_close_24)
             GameManager.updateGame(this, pollState)
             disableButtons()
             turnBased()
@@ -120,6 +130,7 @@ class GameActivity : AppCompatActivity() {
             pollState = listOf(col1) + listOf(col2) + listOf(col3)
             contendersTurn = true
             gameList.remove(8)
+            binding.btn8.setBackgroundResource(R.drawable.ic_baseline_close_24)
             GameManager.updateGame(this, pollState)
             disableButtons()
             turnBased()
@@ -131,6 +142,7 @@ class GameActivity : AppCompatActivity() {
             pollState = listOf(col1) + listOf(col2) + listOf(col3)
             contendersTurn = true
             gameList.remove(9)
+            binding.btn9.setBackgroundResource(R.drawable.ic_baseline_close_24)
             GameManager.updateGame(this, pollState)
             disableButtons()
             turnBased()
@@ -141,9 +153,6 @@ class GameActivity : AppCompatActivity() {
             disableButtons()
             turnBased()
         }
-
-        binding.contenderGameName.text = "Waiting for opponent..."
-        binding.myGameName.text = myName
 
         GlobalScope.launch {
             while (binding.contenderGameName.text == "Waiting for opponent...") {
@@ -160,7 +169,6 @@ class GameActivity : AppCompatActivity() {
     }
 
     fun turnBased() {
-
         GlobalScope.launch {
             while (contendersTurn) {
                 delay(1000)
@@ -189,7 +197,7 @@ class GameActivity : AppCompatActivity() {
                         runOnUiThread {
                             binding.winOrLose.text = GameManager.winMessage
                         }
-                        delay(5000)
+                        delay(2000)
                         finish()
                     }
                     enableButtons()
@@ -229,6 +237,35 @@ class GameActivity : AppCompatActivity() {
                 }
                 if (btn == 9) {
                     binding.btn9.isEnabled = true
+                }
+            }
+            for (btn in opponentList) {
+                if (btn == 1) {
+                    binding.btn1.setBackgroundResource(R.drawable.ic_baseline_panorama_fish_eye_24)
+                }
+                if (btn == 2) {
+                    binding.btn2.setBackgroundResource(R.drawable.ic_baseline_panorama_fish_eye_24)
+                }
+                if (btn == 3) {
+                    binding.btn3.setBackgroundResource(R.drawable.ic_baseline_panorama_fish_eye_24)
+                }
+                if (btn == 4) {
+                    binding.btn4.setBackgroundResource(R.drawable.ic_baseline_panorama_fish_eye_24)
+                }
+                if (btn == 5) {
+                    binding.btn5.setBackgroundResource(R.drawable.ic_baseline_panorama_fish_eye_24)
+                }
+                if (btn == 6) {
+                    binding.btn6.setBackgroundResource(R.drawable.ic_baseline_panorama_fish_eye_24)
+                }
+                if (btn == 7) {
+                    binding.btn7.setBackgroundResource(R.drawable.ic_baseline_panorama_fish_eye_24)
+                }
+                if (btn == 8) {
+                    binding.btn8.setBackgroundResource(R.drawable.ic_baseline_panorama_fish_eye_24)
+                }
+                if (btn == 9) {
+                    binding.btn9.setBackgroundResource(R.drawable.ic_baseline_panorama_fish_eye_24)
                 }
             }
         }

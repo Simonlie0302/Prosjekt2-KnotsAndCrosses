@@ -1,21 +1,29 @@
 package com.ikt205.knotsandcrosses
 
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.preference.PreferenceManager
 import android.util.Log
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate
 import com.ikt205.knotsandcrosses.App.Companion.context
+import com.ikt205.knotsandcrosses.GameManager.contenderName
 import com.ikt205.knotsandcrosses.GameManager.gId
+import com.ikt205.knotsandcrosses.GameManager.gameList
 import com.ikt205.knotsandcrosses.GameManager.myName
+import com.ikt205.knotsandcrosses.GameManager.opponentList
 import com.ikt205.knotsandcrosses.GameManager.pollGame
+import com.ikt205.knotsandcrosses.GameManager.winMessage
 import com.ikt205.knotsandcrosses.databinding.ActivityMainBinding
 import com.ikt205.knotsandcrosses.databinding.DialogCreateGameBinding
 import com.ikt205.knotsandcrosses.databinding.DialogJoinGameBinding
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import kotlin.concurrent.fixedRateTimer
 import kotlin.concurrent.schedule
@@ -42,10 +50,6 @@ class MainActivity : AppCompatActivity(), GameDialogListener {
     }
 
     private fun createNewGame() {
-        //val dlg = CreateGameDialog()
-
-        //dlg.show(supportFragmentManager,"CreateGameDialogFragment")
-
         val builder = AlertDialog.Builder(this)
         val inflater = layoutInflater
         builder.setTitle("Create a game:")
@@ -58,7 +62,7 @@ class MainActivity : AppCompatActivity(), GameDialogListener {
             myName = inputText.text.toString()
             Thread.sleep(500)
             val intent = Intent(this, GameActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, 2)
         }
         builder.show()
     }
@@ -78,9 +82,10 @@ class MainActivity : AppCompatActivity(), GameDialogListener {
             print("inside alert dialog \n")
             gId = inputGameId.text.toString()
             onDialogJoinGame(inputUsername.text.toString(), inputGameId.text.toString())
+            myName = inputUsername.text.toString()
             Thread.sleep(500)
             val intent = Intent(this, GameActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, 2)
         }
         builder.show()
     }
@@ -95,4 +100,20 @@ class MainActivity : AppCompatActivity(), GameDialogListener {
         Log.d(TAG, "$player $gameId")
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        contenderName = ""
+        gId = ""
+        myName = ""
+        opponentList = mutableListOf<Int>()
+        gameList = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9)
+
+        println(contenderName)
+        println(gId)
+        println(myName)
+        println(gameList)
+        println(opponentList)
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
 }
+
