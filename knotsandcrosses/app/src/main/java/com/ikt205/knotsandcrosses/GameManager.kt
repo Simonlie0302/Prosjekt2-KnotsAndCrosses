@@ -3,16 +3,20 @@ package com.ikt205.knotsandcrosses
 import android.content.Context
 import com.fasterxml.jackson.module.kotlin.*
 
-
 object GameManager {
 
-    lateinit var gId: String
+    var gId: String = ""
     lateinit var pollState: GameState
     lateinit var col1: MutableList<Int>
     lateinit var col2: MutableList<Int>
     lateinit var col3: MutableList<Int>
     var contendersTurn = true
-
+    var gameList = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9)
+    var myState = 1
+    var opponentState = 2
+    var contenderName = ""
+    var myName = ""
+    var winMessage = ""
 
     val StartingGameState: GameState = listOf(listOf(0, 0, 0), listOf(0, 0, 0), listOf(0, 0, 0))
 
@@ -26,6 +30,7 @@ object GameManager {
                 print("ERROR \n")
             } else {
                 gId = game?.gameId.toString()
+                pollGame(context)
                 print("\nWe have a game\n")
             }
         }
@@ -34,6 +39,7 @@ object GameManager {
     fun joinGame(player: String, context: Context, gameId: String) {
 
         print("Motstanders tur \n")
+        gId = gameId
 
         contendersTurn = true
 
@@ -41,6 +47,7 @@ object GameManager {
             if (err != null) {
                 print("ERROR \n")
             } else {
+                pollGame(context)
                 print("\nWe have joined a game with the id: " + gameId)
             }
         }
@@ -49,7 +56,6 @@ object GameManager {
     fun pollGame(context: Context) {
 
         print("Pollgame function \n")
-        println(gId)
 
         GameService(context).pollGame(gId) { game: Game?, err: Int? ->
             if (err != null) {
@@ -58,37 +64,35 @@ object GameManager {
                 println("\nJoined a game with the id: " + gId)
 
                 val gamePollState = game?.state
-
-//                val gamePollState = Gson().fromJson(it.toString(0), Game::class.java)
-//
-//                val gson = Gson()
-//
-//                val objectList = gson.fromJson(gamePollState, Array::class.java).asList()
-
                 val mapper = jacksonObjectMapper()
-//
-//                val genres = mapper.readValue<List<Int>>(gamePollState.toString())
-//
+
                 var newState = mapper.readValue(gamePollState, List::class.java)
-//
-//               println("Dette er genres: $genres")
-                // println("Dette er dtos: $newState dette er riktig"+newState[0])
 
                 pollState = newState as GameState
 
-                var testState1 = newState[0].toMutableList()
-                var testState2 = newState[1].toMutableList()
-                var testState3 = newState[2].toMutableList()
+                var newCol1 = newState[0].toMutableList()
+                var newCol2 = newState[1].toMutableList()
+                var newCol3 = newState[2].toMutableList()
 
-                col1 = testState1
-                col2 = testState2
-                col3 = testState3
+                col1 = newCol1
+                col2 = newCol2
+                col3 = newCol3
 
-//                println("Dette er dtos: $pollState dette er riktig"+pollState[0])
+//                var checkContendersData = (col1 + col2 + col3)
+//
+//                for (i in checkContendersData) {
+//                    if (i != myState) {
+//                        opponentState = 2
+//                    }
+//                }
 
-
-//                println("\n her er listen" + objectList + "Ny liste")
-
+                if (contenderName == "") {
+                    if (game?.players?.size!! > 1) {
+                        contenderName = game.players[1]
+                        println(contenderName)
+                    }
+                }
+                disableContendersButtons()
             }
         }
     }
@@ -105,4 +109,83 @@ object GameManager {
             }
         }
     }
+
+    fun gameFinished(state: Int): Boolean {
+        winMessage = if (state == myState) {
+            "I won"
+        } else {
+            "Opponent win"
+        }
+
+        // Horisontal win
+        if (col1[0] == state && col1[1] == state && col1[2] == state) {
+            println(winMessage)
+            return true
+        }
+        if (col2[0] == state && col2[1] == state && col2[2] == state) {
+            println(winMessage)
+            return true
+        }
+        if (col3[0] == state && col3[1] == state && col3[2] == state) {
+            println(winMessage)
+            return true
+        }
+
+        // Vertical win
+        if (col1[0] == state && col2[0] == state && col3[0] == state) {
+            println(winMessage)
+            return true
+        }
+        if (col1[1] == state && col2[1] == state && col3[1] == state) {
+            println(winMessage)
+            return true
+        }
+        if (col1[2] == state && col2[2] == state && col3[2] == state) {
+            println(winMessage)
+            return true
+        }
+
+        // Diagonal win
+        if (col1[0] == state && col2[1] == state && col3[2] == state) {
+            println(winMessage)
+            return true
+        }
+        if (col1[2] == state && col2[1] == state && col3[0] == state) {
+            println(winMessage)
+            return true
+        }
+        return false
+    }
+
+    fun disableContendersButtons() {
+        if (col1[0] == opponentState) {
+            gameList.remove(1)
+        }
+        if (col1[1] == opponentState) {
+            gameList.remove(2)
+        }
+        if (col1[2] == opponentState) {
+            gameList.remove(3)
+        }
+        if (col2[0] == opponentState) {
+            gameList.remove(4)
+        }
+        if (col2[1] == opponentState) {
+            gameList.remove(5)
+        }
+        if (col2[2] == opponentState) {
+            gameList.remove(6)
+        }
+        if (col3[0] == opponentState) {
+            gameList.remove(7)
+        }
+        if (col3[1] == opponentState) {
+            gameList.remove(8)
+        }
+        if (col3[2] == opponentState) {
+            gameList.remove(9)
+        }
+        println("Denne er ny: " + gameList)
+    }
+
 }

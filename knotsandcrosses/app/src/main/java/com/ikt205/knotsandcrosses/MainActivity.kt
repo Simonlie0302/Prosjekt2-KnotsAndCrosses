@@ -11,6 +11,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import com.ikt205.knotsandcrosses.App.Companion.context
 import com.ikt205.knotsandcrosses.GameManager.gId
+import com.ikt205.knotsandcrosses.GameManager.myName
 import com.ikt205.knotsandcrosses.GameManager.pollGame
 import com.ikt205.knotsandcrosses.databinding.ActivityMainBinding
 import com.ikt205.knotsandcrosses.databinding.DialogCreateGameBinding
@@ -51,20 +52,15 @@ class MainActivity : AppCompatActivity(), GameDialogListener {
         val dialogLayout = inflater.inflate(R.layout.dialog_create_game, null)
         val inputText = dialogLayout.findViewById<EditText>(R.id.username)
         builder.setView(dialogLayout)
-        print("before alert dialog \n")
 
         builder.setPositiveButton("OK") { dialogInterface, i ->
-            //listener.onDialogCreateGame(inputText.text.toString())
-            print("inside alert dialog \n")
             onDialogCreateGame(inputText.text.toString())
+            myName = inputText.text.toString()
             Thread.sleep(500)
             val intent = Intent(this, GameActivity::class.java)
             startActivity(intent)
         }
         builder.show()
-
-        print("after alert dialog \n")
-
     }
 
     private fun joinGame() {
