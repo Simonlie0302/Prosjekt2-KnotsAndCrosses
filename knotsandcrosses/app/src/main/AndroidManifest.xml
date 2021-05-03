@@ -13,11 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Knotsandcrosses"
         android:usesCleartextTraffic="true">
-        <service
-            android:name=".PollService"
-            android:enabled="true"
-            android:exported="true"></service>
-
         <activity android:name=".GameActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>

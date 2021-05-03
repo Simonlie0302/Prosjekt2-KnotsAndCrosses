@@ -1,37 +1,21 @@
 package com.ikt205.knotsandcrosses
 
-import android.content.Context
-import android.content.DialogInterface
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.preference.PreferenceManager
 import android.util.Log
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatDelegate
-import com.ikt205.knotsandcrosses.App.Companion.context
 import com.ikt205.knotsandcrosses.GameManager.contenderName
 import com.ikt205.knotsandcrosses.GameManager.gId
 import com.ikt205.knotsandcrosses.GameManager.gameList
 import com.ikt205.knotsandcrosses.GameManager.myName
 import com.ikt205.knotsandcrosses.GameManager.opponentList
-import com.ikt205.knotsandcrosses.GameManager.pollGame
-import com.ikt205.knotsandcrosses.GameManager.winMessage
 import com.ikt205.knotsandcrosses.databinding.ActivityMainBinding
-import com.ikt205.knotsandcrosses.databinding.DialogCreateGameBinding
-import com.ikt205.knotsandcrosses.databinding.DialogJoinGameBinding
-import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
-import kotlin.concurrent.fixedRateTimer
-import kotlin.concurrent.schedule
 
 
 class MainActivity : AppCompatActivity(), GameDialogListener {
-
-    val TAG: String = "MainActivity"
 
     lateinit var binding: ActivityMainBinding
 
@@ -62,6 +46,8 @@ class MainActivity : AppCompatActivity(), GameDialogListener {
             myName = inputText.text.toString()
             Thread.sleep(500)
             val intent = Intent(this, GameActivity::class.java)
+
+            // Starting the game activity with ForResualt to further use OneActivityResult functionality
             startActivityForResult(intent, 2)
         }
         builder.show()
@@ -78,13 +64,14 @@ class MainActivity : AppCompatActivity(), GameDialogListener {
         print("before alert dialog \n")
 
         builder.setPositiveButton("OK") { dialogInterface, i ->
-            //listener.onDialogCreateGame(inputTex t.text.toString())
             print("inside alert dialog \n")
             gId = inputGameId.text.toString()
             onDialogJoinGame(inputUsername.text.toString(), inputGameId.text.toString())
             myName = inputUsername.text.toString()
             Thread.sleep(500)
             val intent = Intent(this, GameActivity::class.java)
+
+            // Starting the game activity with ForResualt to further use OneActivityResult functionality
             startActivityForResult(intent, 2)
         }
         builder.show()
@@ -92,26 +79,20 @@ class MainActivity : AppCompatActivity(), GameDialogListener {
 
     override fun onDialogCreateGame(player: String) {
         GameManager.createGame(player, this)
-        Log.d(TAG, player)
     }
 
     override fun onDialogJoinGame(player: String, gameId: String) {
         GameManager.joinGame(player, this, gameId)
-        Log.d(TAG, "$player $gameId")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        // Restart game after win/loos functionality
         contenderName = ""
         gId = ""
         myName = ""
         opponentList = mutableListOf<Int>()
         gameList = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9)
 
-        println(contenderName)
-        println(gId)
-        println(myName)
-        println(gameList)
-        println(opponentList)
         super.onActivityResult(requestCode, resultCode, data)
     }
 

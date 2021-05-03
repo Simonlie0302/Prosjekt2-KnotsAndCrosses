@@ -1,8 +1,6 @@
 package com.ikt205.knotsandcrosses
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.ikt205.knotsandcrosses.GameManager.col1
 import com.ikt205.knotsandcrosses.GameManager.col2
@@ -10,7 +8,6 @@ import com.ikt205.knotsandcrosses.GameManager.col3
 import com.ikt205.knotsandcrosses.GameManager.contenderName
 import com.ikt205.knotsandcrosses.GameManager.pollState
 import com.ikt205.knotsandcrosses.GameManager.contendersTurn
-import com.ikt205.knotsandcrosses.GameManager.createGame
 import com.ikt205.knotsandcrosses.GameManager.gId
 import com.ikt205.knotsandcrosses.GameManager.gameFinished
 import com.ikt205.knotsandcrosses.GameManager.gameList
@@ -26,8 +23,6 @@ import kotlinx.coroutines.launch
 
 class GameActivity : AppCompatActivity() {
 
-    val TAG: String = "GameActivity"
-
     lateinit var binding: ActivityGameBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,11 +30,11 @@ class GameActivity : AppCompatActivity() {
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Because I used the altering toolbar functionality in my last project, i decided to not do that here
         binding.gameTitleID.text = gId
         binding.contenderGameName.text = "Waiting for opponent..."
         binding.myGameName.text = myName
 
-        // Sett en if statement inni i hver knapp som sjekker om den er true, så ikke oppdater listen
         binding.btn1.setOnClickListener {
             col1[0] = myState
             pollState = listOf(col1) + listOf(col2) + listOf(col3)
@@ -49,7 +44,6 @@ class GameActivity : AppCompatActivity() {
             GameManager.updateGame(this, pollState)
             disableButtons()
             turnBased()
-            println(gameList)
         }
 
         binding.btn2.setOnClickListener {
@@ -61,7 +55,6 @@ class GameActivity : AppCompatActivity() {
             GameManager.updateGame(this, pollState)
             disableButtons()
             turnBased()
-            println(pollState)
         }
 
         binding.btn3.setOnClickListener {
@@ -73,7 +66,6 @@ class GameActivity : AppCompatActivity() {
             GameManager.updateGame(this, pollState)
             disableButtons()
             turnBased()
-            println(pollState)
         }
 
         binding.btn4.setOnClickListener {
@@ -85,7 +77,6 @@ class GameActivity : AppCompatActivity() {
             GameManager.updateGame(this, pollState)
             disableButtons()
             turnBased()
-            println(pollState)
         }
 
         binding.btn5.setOnClickListener {
@@ -97,7 +88,6 @@ class GameActivity : AppCompatActivity() {
             GameManager.updateGame(this, pollState)
             disableButtons()
             turnBased()
-            println(pollState)
         }
 
         binding.btn6.setOnClickListener {
@@ -109,7 +99,6 @@ class GameActivity : AppCompatActivity() {
             GameManager.updateGame(this, pollState)
             disableButtons()
             turnBased()
-            println(pollState)
         }
 
         binding.btn7.setOnClickListener {
@@ -121,8 +110,6 @@ class GameActivity : AppCompatActivity() {
             GameManager.updateGame(this, pollState)
             disableButtons()
             turnBased()
-            println(pollState)
-
         }
 
         binding.btn8.setOnClickListener {
@@ -134,7 +121,6 @@ class GameActivity : AppCompatActivity() {
             GameManager.updateGame(this, pollState)
             disableButtons()
             turnBased()
-            println(pollState)
         }
 
         binding.btn9.setOnClickListener {
@@ -146,7 +132,6 @@ class GameActivity : AppCompatActivity() {
             GameManager.updateGame(this, pollState)
             disableButtons()
             turnBased()
-            print(pollState)
         }
 
         if (contendersTurn) {
@@ -179,17 +164,17 @@ class GameActivity : AppCompatActivity() {
                     }
 
                     delay(5000)
+                    // Finish the activity and go to mainctivity onActivityResult
                     finish()
                 }
                 var tempList = pollState
-                delay(3000)
+                delay(2000)
 
                 pollGame(applicationContext)
 
                 delay(1000)
 
                 if (!(tempList.containsAll(pollState) && pollState.containsAll(tempList))) {
-                    println("Min tur")
                     contendersTurn = false
 
                     if(gameFinished(opponentState)){
@@ -197,12 +182,11 @@ class GameActivity : AppCompatActivity() {
                         runOnUiThread {
                             binding.winOrLose.text = GameManager.winMessage
                         }
-                        delay(2000)
+                        delay(5000)
+                        // Finish the activity and go to mainctivity onActivityResult
                         finish()
                     }
                     enableButtons()
-                } else {
-                    println("Motstanders trekk")
                 }
             }
         }

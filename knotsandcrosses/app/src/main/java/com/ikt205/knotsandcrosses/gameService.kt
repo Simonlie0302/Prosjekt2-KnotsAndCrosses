@@ -7,40 +7,21 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
-import com.ikt205.knotsandcrosses.R
-import com.ikt205.knotsandcrosses.Game
-import com.ikt205.knotsandcrosses.GameState
-import com.ikt205.knotsandcrosses.App
 import org.json.JSONObject
 import java.util.*
-import kotlin.concurrent.schedule
 
 typealias GameServiceCallback = (state: Game?, errorCode: Int?) -> Unit
 
-/*  NOTE:
-    Using object expression to make GameService a Singleton.
-    Why? Because there should only be one active GameService ever.
- */
-
 class GameService(context: Context) {
 
-    /// NOTE: Do not want to have App.context all over the code. Also it is nice if we later want to support different contexts
-    //private val context = App.context
-
-    /// NOTE: God practice to use a que for performing requests.
+    /// For performing requests in a queue
     private val requestQue: RequestQueue = Volley.newRequestQueue(context)
 
-    /// NOTE: One posible way of constructing a list of API url. You want to construct the urls so that you can support different environments (i.e. Debug, Test, Prod etc)
     fun APIEndpoints(): String {
-
         val url = Uri.Builder().apply {
             scheme("https")
             authority("generic-game-service.herokuapp.com")
             appendPath("Game")
-//            appendPath("types")
-//            appendQueryParameter("type", "1")
-//            appendQueryParameter("sort", "relevance")
-//            fragment("section-name")
             build()
         }.toString()
 
@@ -77,15 +58,11 @@ class GameService(context: Context) {
         }
 
         requestQue.add(request)
-
     }
 
     fun joinGame(playerId: String, gameId: String, callback: GameServiceCallback) {
-
-        val url = APIEndpoints()
-
+        // Build my designated URL
         val urlJoin: String = Uri.Builder().apply {
-            // url
             scheme("https")
             authority("generic-game-service.herokuapp.com")
             appendPath("Game")
@@ -122,10 +99,8 @@ class GameService(context: Context) {
     }
 
     fun updateGame(gameId: String, gameState: GameState, callback: GameServiceCallback) {
-        val url = APIEndpoints()
-
+        // Build my designated URL
         val urlJoin: String = Uri.Builder().apply {
-            // url
             scheme("https")
             authority("generic-game-service.herokuapp.com")
             appendPath("Game")
@@ -162,8 +137,8 @@ class GameService(context: Context) {
     }
 
     fun pollGame(gameId: String, callback: GameServiceCallback) {
+        // Build my designated URL with the gameId
         val urlJoin: String = Uri.Builder().apply {
-            // url
             scheme("https")
             authority("generic-game-service.herokuapp.com")
             appendPath("Game")
@@ -187,6 +162,7 @@ class GameService(context: Context) {
                 // Error creating new game.
                 callback(null, it.networkResponse.statusCode)
             }) {
+            // Setting a header to the designated content type and game service key from swagger description
             override fun getHeaders(): MutableMap<String, String> {
                 val headers = HashMap<String, String>()
                 headers["Content-Type"] = "application/json"
@@ -194,6 +170,7 @@ class GameService(context: Context) {
                 return headers
             }
         }
+
         requestQue.add(request)
     }
 
