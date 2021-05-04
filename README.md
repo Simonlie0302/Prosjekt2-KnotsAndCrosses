@@ -42,8 +42,8 @@ Tic Tac Toe has fully working functionality and the architecture of the code is 
    *  Integrated with the users standard setting, by choosing system default
 
 <img align="left" width="200" height="350" src="https://user-images.githubusercontent.com/73124270/117064256-3be29680-ad26-11eb-9350-b739a8e03435.png">
-<img align="left" width="100" height="250" src="https://user-images.githubusercontent.com/73124270/117058705-3d5c9080-ad1f-11eb-885e-10ce2c991e8e.png">
-<img align="left" width="100" height="250" src="https://user-images.githubusercontent.com/73124270/117058723-42214480-ad1f-11eb-95a4-1977f0f65492.png">
+<img align="left" width="200" height="350" src="https://user-images.githubusercontent.com/73124270/117058705-3d5c9080-ad1f-11eb-885e-10ce2c991e8e.png">
+<img align="left" width="200" height="350" src="https://user-images.githubusercontent.com/73124270/117058723-42214480-ad1f-11eb-95a4-1977f0f65492.png">
 
 <br />
 <br />
