@@ -38,7 +38,7 @@ Tic Tac Toe has fully working functionality and the architecture of the code is 
 <h3 align="Left">Further functionality</h3>
 
 *  Added darkmode to my app.
-   *  Pop up dialog menu with 3 different choices
+   *  Pop up dialog menu with 3 different choices (Moon button in the top-middle)
    *  Integrated with the users standard setting, by choosing system default
 
 <img align="left" width="200" height="350" src="https://user-images.githubusercontent.com/73124270/117064256-3be29680-ad26-11eb-9350-b739a8e03435.png">
