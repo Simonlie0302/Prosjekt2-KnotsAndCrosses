@@ -2,7 +2,7 @@
 
 <h1 align="Center">App name: Tic Tac Toe</h1>
 
-<img width="360" src="https://user-images.githubusercontent.com/73124270/117058560-11410f80-ad1f-11eb-89a4-346aad8fb3b1.png">
+<img width="360" src="https://user-images.githubusercontent.com/73124270/117058560-11410f80-ad1f-11eb-89a4-346aad8fb3b1.png" src="https://user-images.githubusercontent.com/73124270/117058620-2ae25700-ad1f-11eb-974c-c2db989ccb4d.png">
 <img width="359" src="https://user-images.githubusercontent.com/73124270/117058620-2ae25700-ad1f-11eb-974c-c2db989ccb4d.png">
 <img width="358" src="https://user-images.githubusercontent.com/73124270/117058666-346bbf00-ad1f-11eb-8e89-e7a188d734d6.png">
 
