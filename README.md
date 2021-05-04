@@ -2,9 +2,18 @@
 
 <h1 align="Center">App name: Tic Tac Toe</h1>
 
-<img align="left" width="200" height="300" src="https://user-images.githubusercontent.com/73124270/117058560-11410f80-ad1f-11eb-89a4-346aad8fb3b1.png">
-<img align="center" width="200" height="300" src="https://user-images.githubusercontent.com/73124270/117058620-2ae25700-ad1f-11eb-974c-c2db989ccb4d.png">
-<img align="right" width="200" height="300" src="https://user-images.githubusercontent.com/73124270/117058666-346bbf00-ad1f-11eb-8e89-e7a188d734d6.png">
+<img align="left" width="200" height="350" src="https://user-images.githubusercontent.com/73124270/117058560-11410f80-ad1f-11eb-89a4-346aad8fb3b1.png">
+<img align="left" width="200" height="350" src="https://user-images.githubusercontent.com/73124270/117058620-2ae25700-ad1f-11eb-974c-c2db989ccb4d.png">
+<img align="left" width="200" height="350" src="https://user-images.githubusercontent.com/73124270/117058666-346bbf00-ad1f-11eb-8e89-e7a188d734d6.png">
+
+Tic Tac Toe has fully working functionality and the architecture of the code is carefully planned with separate data classes, services and game object to link it together. Actively used git branches during my codign and named them after functionality or service that was developed. Did also add extra functionality by developing a darkmode option that is comfortable to look at.
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
 
 <h3 align="Left">Features</h3>
@@ -32,12 +41,25 @@
    *  Pop up dialog menu with 3 different choices
    *  Integrated with the users standard setting, by choosing system default
 
+<img align="left" width="200" height="350" src="https://user-images.githubusercontent.com/73124270/117064256-3be29680-ad26-11eb-9350-b739a8e03435.png">
+<img align="left" width="100" height="250" src="https://user-images.githubusercontent.com/73124270/117058705-3d5c9080-ad1f-11eb-885e-10ce2c991e8e.png">
+<img align="left" width="100" height="250" src="https://user-images.githubusercontent.com/73124270/117058723-42214480-ad1f-11eb-95a4-1977f0f65492.png">
 
-<img width="358" alt="Screenshot 2021-05-04 at 16 13 39" src="https://user-images.githubusercontent.com/73124270/117058705-3d5c9080-ad1f-11eb-885e-10ce2c991e8e.png">
-
-<img width="363" alt="Screenshot 2021-05-04 at 16 14 40" src="https://user-images.githubusercontent.com/73124270/117058723-42214480-ad1f-11eb-95a4-1977f0f65492.png">
-
-
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
 <h3 align="Left">Backend</h3>
 
