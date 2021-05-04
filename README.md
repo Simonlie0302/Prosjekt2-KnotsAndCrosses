@@ -6,7 +6,7 @@
 <img align="left" width="200" height="350" src="https://user-images.githubusercontent.com/73124270/117058620-2ae25700-ad1f-11eb-974c-c2db989ccb4d.png">
 <img align="left" width="200" height="350" src="https://user-images.githubusercontent.com/73124270/117058666-346bbf00-ad1f-11eb-8e89-e7a188d734d6.png">
 
-Tic Tac Toe has fully working functionality and the architecture of the code is carefully planned with separate data classes, services and game object to link it together. Actively used git branches during my codign and named them after functionality or service that was developed. Did also add extra functionality by developing a darkmode option that is comfortable to look at.
+Tic Tac Toe has fully working functionality and the architecture of the code is carefully planned with separate data classes, services, manager and game object to link it together. Actively used git branches during my codign and named them after functionality or service that was developed. Did also add extra functionality by developing a darkmode option that is comfortable to look at.
 
 <br />
 <br />
