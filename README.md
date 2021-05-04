@@ -2,10 +2,17 @@
 
 <h1 align="Center">App name: Tic Tac Toe</h1>
 
-<img width="200" src="https://user-images.githubusercontent.com/73124270/117058560-11410f80-ad1f-11eb-89a4-346aad8fb3b1.png">
-<img width="200" src="https://user-images.githubusercontent.com/73124270/117058620-2ae25700-ad1f-11eb-974c-c2db989ccb4d.png">
-<img width="200" src="https://user-images.githubusercontent.com/73124270/117058666-346bbf00-ad1f-11eb-8e89-e7a188d734d6.png">
-
+<div class="row">
+  <div class="column">
+    <img width="200" src="https://user-images.githubusercontent.com/73124270/117058560-11410f80-ad1f-11eb-89a4-346aad8fb3b1.png">
+  </div>
+  <div class="column">
+    <img width="200" src="https://user-images.githubusercontent.com/73124270/117058620-2ae25700-ad1f-11eb-974c-c2db989ccb4d.png">
+  </div>
+  <div class="column">
+    <img width="200" src="https://user-images.githubusercontent.com/73124270/117058666-346bbf00-ad1f-11eb-8e89-e7a188d734d6.png">
+  </div>
+</div>
 
 <h3 align="Left">Features</h3>
 
