@@ -104,9 +104,9 @@ object GameManager {
 
     fun gameFinished(state: Int): Boolean {
         winMessage = if (state == myState) {
-            "I won"
+            "I won!"
         } else {
-            "Opponent win"
+            "Opponent win!"
         }
 
         // Horisontal win
@@ -146,6 +146,12 @@ object GameManager {
             println(winMessage)
             return true
         }
+
+        if (gameList.isEmpty()){
+            winMessage = "It´s a tie!"
+            return true
+        }
+
         return false
     }
 

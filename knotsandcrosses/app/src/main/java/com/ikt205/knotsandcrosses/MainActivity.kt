@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import com.ikt205.knotsandcrosses.GameManager.contenderName
@@ -50,10 +51,15 @@ class MainActivity : AppCompatActivity(), GameDialogListener {
             onDialogCreateGame(inputText.text.toString())
             myName = inputText.text.toString()
             Thread.sleep(500)
-            val intent = Intent(this, GameActivity::class.java)
+            if (myName != "") {
+                val intent = Intent(this, GameActivity::class.java)
 
-            // Starting the game activity with ForResualt to further use OneActivityResult functionality
-            startActivityForResult(intent, 2)
+                // Starting the game activity with ForResualt to further use OneActivityResult functionality
+                startActivityForResult(intent, 2)
+            }
+            else {
+                Toast.makeText(applicationContext, "Name can't be blank!", Toast.LENGTH_LONG).show()
+            }
         }
         builder.show()
     }
@@ -74,20 +80,29 @@ class MainActivity : AppCompatActivity(), GameDialogListener {
             onDialogJoinGame(inputUsername.text.toString(), inputGameId.text.toString())
             myName = inputUsername.text.toString()
             Thread.sleep(500)
-            val intent = Intent(this, GameActivity::class.java)
+            if (myName != "" && gId != "") {
+                val intent = Intent(this, GameActivity::class.java)
 
-            // Starting the game activity with ForResualt to further use OneActivityResult functionality
-            startActivityForResult(intent, 2)
+                // Starting the game activity with ForResualt to further use OneActivityResult functionality
+                startActivityForResult(intent, 2)
+            }
+            else {
+                Toast.makeText(applicationContext, "Can't be blank!", Toast.LENGTH_LONG).show()
+            }
         }
         builder.show()
     }
 
     override fun onDialogCreateGame(player: String) {
+        if(myName != ""){
         GameManager.createGame(player, this)
+        }
     }
 
     override fun onDialogJoinGame(player: String, gameId: String) {
-        GameManager.joinGame(player, this, gameId)
+        if(myName != ""){
+            GameManager.joinGame(player, this, gameId)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -100,6 +115,7 @@ class MainActivity : AppCompatActivity(), GameDialogListener {
 
         super.onActivityResult(requestCode, resultCode, data)
     }
+
     private fun chooseThemeDialog() {
 
         val builder = AlertDialog.Builder(this)
