@@ -1,5 +1,6 @@
 package com.ikt205.knotsandcrosses
 
+import com.ikt205.knotsandcrosses.Data.Game
 import com.ikt205.knotsandcrosses.GameManager.winMessage
 import org.junit.Test
 
@@ -17,15 +18,26 @@ class UnitTest {
     }
 
     @Test
-    fun check_gameWin(){
-        assertEquals(winMessage == "I won!",
-            Game(mutableListOf("test1", "test2"), "gameId", "[[0, 1, 0], [0, 1, 0], [0, 1, 0]]" ))
+    fun check_formatting(){
+        assertEquals("Game(players=[test1, test2], " +
+                "gameId=gameId, " +
+                "state=[[0, 1, 0], [0, 1, 0], [0, 1, 0]])",
+            Game(mutableListOf("test1", "test2"),
+                "gameId",
+                "[[0, 1, 0], [0, 1, 0], [0, 1, 0]]").toString()
+        )
     }
 
     @Test
     fun check_gameLose(){
         assertEquals(winMessage == "Opponent win!",
-            Game(mutableListOf("test1", "test2"), "gameId", "[[0, 0, 2], [0, 0, 2], [0, 0, 2]]" ))
+            Game(mutableListOf("test1", "test2"), "gameId", "[[0, 0, 2], [0, 0, 2], [0, 0, 2]]" ).gamefinished())
+    }
+
+    @Test
+    fun check_gameWin(){
+        assertEquals(true,
+            Game(mutableListOf("test1", "test2"), "gameId", "[[0, 0, 2], [0, 0, 2], [0, 0, 2]]" ).gamefinished())
     }
 
     @Test
@@ -36,7 +48,7 @@ class UnitTest {
 
     @Test
     fun check_tilesTaken(){
-        assertEquals(6,
+        assertEquals(9,
             Game(mutableListOf("test1", "test2"), "gameId", "[[0, 1, 0], [0, 2, 0], [1, 0, 0]]").tilesTaken())
     }
 }

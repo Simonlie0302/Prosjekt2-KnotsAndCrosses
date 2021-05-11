@@ -1,4 +1,4 @@
-package com.ikt205.knotsandcrosses
+package com.ikt205.knotsandcrosses.Data
 
 import android.os.Parcelable
 import com.ikt205.knotsandcrosses.GameManager.gameList
@@ -15,7 +15,6 @@ data class Game(val players:MutableList<String>, val gameId:String, val state: S
     fun tilesTaken(): Int {
         return gameList.size
     }
-
 
 }
 

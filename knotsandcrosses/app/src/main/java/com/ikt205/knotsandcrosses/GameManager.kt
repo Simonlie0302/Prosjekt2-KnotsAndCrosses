@@ -2,6 +2,8 @@ package com.ikt205.knotsandcrosses
 
 import android.content.Context
 import com.fasterxml.jackson.module.kotlin.*
+import com.ikt205.knotsandcrosses.Data.Game
+import com.ikt205.knotsandcrosses.Data.GameState
 
 object GameManager {
 
@@ -20,7 +22,7 @@ object GameManager {
     var myName = ""
     var winMessage = ""
     var gId: String = ""
-    var contendersTurn = true
+    var contendersTurn = false
 
 
     fun createGame(player: String, context: Context) {

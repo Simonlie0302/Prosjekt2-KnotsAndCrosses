@@ -7,6 +7,8 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
+import com.ikt205.knotsandcrosses.Data.Game
+import com.ikt205.knotsandcrosses.Data.GameState
 import org.json.JSONObject
 import java.util.*
 

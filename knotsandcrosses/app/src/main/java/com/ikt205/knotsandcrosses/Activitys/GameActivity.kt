@@ -1,8 +1,8 @@
-package com.ikt205.knotsandcrosses
+package com.ikt205.knotsandcrosses.Activitys
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.toColor
+import com.ikt205.knotsandcrosses.GameManager
 import com.ikt205.knotsandcrosses.GameManager.col1
 import com.ikt205.knotsandcrosses.GameManager.col2
 import com.ikt205.knotsandcrosses.GameManager.col3
@@ -17,6 +17,7 @@ import com.ikt205.knotsandcrosses.GameManager.myState
 import com.ikt205.knotsandcrosses.GameManager.opponentList
 import com.ikt205.knotsandcrosses.GameManager.opponentState
 import com.ikt205.knotsandcrosses.GameManager.pollGame
+import com.ikt205.knotsandcrosses.R
 import com.ikt205.knotsandcrosses.databinding.ActivityGameBinding
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -157,7 +158,7 @@ class GameActivity : AppCompatActivity() {
     fun turnBased() {
         GlobalScope.launch {
             while (contendersTurn) {
-                delay(1000)
+                delay(3000)
                 if(gameFinished(myState)){
                     contendersTurn = false
                     runOnUiThread {

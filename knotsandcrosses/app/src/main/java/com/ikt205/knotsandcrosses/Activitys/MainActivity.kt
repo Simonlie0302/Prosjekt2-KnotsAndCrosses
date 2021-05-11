@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
+import com.ikt205.knotsandcrosses.Activitys.GameActivity
 import com.ikt205.knotsandcrosses.GameManager.contenderName
 import com.ikt205.knotsandcrosses.GameManager.gId
 import com.ikt205.knotsandcrosses.GameManager.gameList
@@ -56,8 +57,7 @@ class MainActivity : AppCompatActivity(), GameDialogListener {
 
                 // Starting the game activity with ForResualt to further use OneActivityResult functionality
                 startActivityForResult(intent, 2)
-            }
-            else {
+            } else {
                 Toast.makeText(applicationContext, "Name can't be blank!", Toast.LENGTH_LONG).show()
             }
         }
@@ -80,13 +80,12 @@ class MainActivity : AppCompatActivity(), GameDialogListener {
             onDialogJoinGame(inputUsername.text.toString(), inputGameId.text.toString())
             myName = inputUsername.text.toString()
             Thread.sleep(500)
-            if (myName != "" && gId != "") {
+            if (myName != "") {
                 val intent = Intent(this, GameActivity::class.java)
 
                 // Starting the game activity with ForResualt to further use OneActivityResult functionality
                 startActivityForResult(intent, 2)
-            }
-            else {
+            } else {
                 Toast.makeText(applicationContext, "Can't be blank!", Toast.LENGTH_LONG).show()
             }
         }
@@ -94,15 +93,11 @@ class MainActivity : AppCompatActivity(), GameDialogListener {
     }
 
     override fun onDialogCreateGame(player: String) {
-        if(myName != ""){
         GameManager.createGame(player, this)
-        }
     }
 
     override fun onDialogJoinGame(player: String, gameId: String) {
-        if(myName != ""){
-            GameManager.joinGame(player, this, gameId)
-        }
+        GameManager.joinGame(player, this, gameId)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
